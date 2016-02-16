@@ -4,7 +4,6 @@
 class HBConfig{
   private String configFile;
   private JSONObject configJson;
-  private BufferReader reader;
 
   HBConfig(String configFile){
     this.configFile = configFile;
@@ -14,7 +13,7 @@ class HBConfig{
     this.configJson = loadJSONObject(this.configFile);
   }
 
-  public String getTile(){
+  public String getTitle(){
     return this.configJson.getString("title");
   }
 

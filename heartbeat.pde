@@ -38,13 +38,13 @@ void draw() {
   conf2.read();
 
   if (conf1.getBPM() > 0) {
-    bpmData = conf1.getBPM() * random(90, 100) / 100;
+    bpmData = conf1.getBPM() * int(random(90, 100) / 100);
   } else {
     bpmData = BPM;
   }
 
-  if (conf1.getSeosnr() > 0) {
-    sensorData = conf1.getSensor() * random(80, 100) / 100;
+  if (conf1.getSensor() > 0) {
+    sensorData = conf1.getSensor() * int(random(80, 100) / 100);
   } else {
     sensorData = sensor;
   }
@@ -52,6 +52,6 @@ void draw() {
   board1.setTitle(conf1.getTitle());
   board2.setTitle(conf2.getTitle());
 
-  board1.draw(sensorData, bpmData, heart--, 0.2);
-  board2.draw(sensorData, bpmData, heart--, 0.2);
+  board1.draw(sensorData, bpmData, heart--, 0.5);
+  board2.draw(sensorData, bpmData, heart--, 0.5);
 }
