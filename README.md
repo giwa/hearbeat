@@ -1,1 +1,1 @@
-# Hear beat monitoring using Processing and Arduino
+# Heart beat monitoring using Processing and Arduino
