@@ -2,19 +2,19 @@
 // Based on given x, y, width, height, this create heart beat wave.
 //
 class HeartBeatDashBoard {
-  int x, y, h, w;
-  int absW, absH;
-  String title;
-  int[] rawY;
-  int[] scaledY;
-  int pulseWindowWidth;
-  int pulseWindowHeight;
-  boolean beat;
-  int bpm;
-  int offset;
-  int sensor;
-  float zoom;
-  int heart;
+  private int x, y, h, w;
+  private int absW, absH;
+  private String title;
+  private int[] rawY;
+  private int[] scaledY;
+  private int pulseWindowWidth;
+  private int pulseWindowHeight;
+  private boolean beat;
+  private int bpm;
+  private int offset;
+  private int sensor;
+  private float zoom;
+  private int heart;
 
   HeartBeatDashBoard(String title, int x, int y, int width, int height, int pulseWindowWidth, int pulseWindowHeight){
     this.title = title;
@@ -39,7 +39,7 @@ class HeartBeatDashBoard {
     this(title, x, y, width, height, int(width * 10 / 12), 450);
   }
 
-  void draw(int sensor, int bpm, int heart, float zoom){
+  public void draw(int sensor, int bpm, int heart, float zoom){
     this.zoom = zoom;
     this.sensor = sensor;
     this.bpm = bpm;
@@ -53,7 +53,7 @@ class HeartBeatDashBoard {
     drawHeartBeatWave();
   }
 
-  void drawHeartBeatWave(){
+  private void drawHeartBeatWave(){
     this.rawY[this.rawY.length - 1] = (1023 - this.sensor) - 212;
     // TODO: adopt offset
     float offset = map(this.zoom, 0.5, 1, this.absH / 3, 0);
@@ -68,22 +68,26 @@ class HeartBeatDashBoard {
     noFill();
     beginShape();
     for (int x = 1; x < this.scaledY.length-1; x++) {
-      vertex(x+30, this.scaledY[x]);
+      // Sampling
+      if (x % 3 == 0) {
+        vertex(x+30, this.scaledY[x]);
+      }
     }
     endShape();
   }
 
-  void drawTitle(){
+  private void drawTitle(){
     fill(#F06292);
     textSize(26);
     text(this.title, this.x + 70, this.y + 10);
   }
 
-  void drawHeart(){
+  private void drawHeart(){
     fill(250,0,0);
     stroke(250,0,0);
     smooth();
     this.heart = max(this.heart, 0);
+    // Move heart
     if (heart > 0){
       strokeWeight(8);
     }
@@ -98,7 +102,7 @@ class HeartBeatDashBoard {
     strokeWeight(1);
   }
 
-  void drawBPM(){
+  private void drawBPM(){
     int bpmX = this.absW - 150;
     int bpmY = this.absH - 150;
 
