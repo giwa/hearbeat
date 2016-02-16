@@ -13,8 +13,6 @@ PFont font;
 void setup(){
   size(1920, 1000);
   frameRate(200);
-  //font = loadFont("Arial-BoldMT-24.vlw");
-  //textFont(font);
 
   println(Serial.list());    // print a list of available serial ports
   // choose the number between the [] that is connected to the Arduino
@@ -27,9 +25,6 @@ void setup(){
 
 void draw() {
   background(#FAFAFA);
-  noStroke();
-
-  board.draw(sensor, BPM, heart, 0.2);
-  board2.draw(sensor, BPM, heart, 0.2);
-  //println(BPM);
+  board.draw(sensor, BPM, heart--, 0.2);
+  board2.draw(sensor, BPM, heart--, 0.2);
 }
