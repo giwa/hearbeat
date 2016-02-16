@@ -11,7 +11,7 @@ class HeartBeatDashBoard {
   private int pulseWindowHeight;
   private boolean beat;
   private int bpm;
-  private int offset;
+  // private int offset;
   private int sensor;
   private float zoom;
   private int heart;
@@ -53,10 +53,15 @@ class HeartBeatDashBoard {
     drawHeartBeatWave();
   }
 
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
   private void drawHeartBeatWave(){
+    // add rect
     this.rawY[this.rawY.length - 1] = (1023 - this.sensor) - 212;
     // TODO: adopt offset
-    float offset = map(this.zoom, 0.5, 1, this.absH / 3, 0);
+    float offset = map(this.zoom, 0.5, 1, this.y + this.pulseWindowHeight / 2, 0);
     for (int i = 0; i < rawY.length - 1; i++){
       rawY[i] = rawY[i+1];
       float dummy = rawY[i] * zoom + offset;
@@ -68,10 +73,7 @@ class HeartBeatDashBoard {
     noFill();
     beginShape();
     for (int x = 1; x < this.scaledY.length-1; x++) {
-      // Sampling
-      if (x % 3 == 0) {
         vertex(x+30, this.scaledY[x]);
-      }
     }
     endShape();
   }
@@ -87,6 +89,7 @@ class HeartBeatDashBoard {
     stroke(250,0,0);
     smooth();
     this.heart = max(this.heart, 0);
+
     // Move heart
     if (heart > 0){
       strokeWeight(8);
